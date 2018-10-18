@@ -1,0 +1,7 @@
+{
+  "name": "meu-starter.login-flow.ionic-v4",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
