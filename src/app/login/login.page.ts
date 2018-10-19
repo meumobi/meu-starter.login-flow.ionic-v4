@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from './../core/auth/auth.service';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
@@ -10,15 +11,26 @@ import { Component, OnInit } from '@angular/core';
 export class LoginPage implements OnInit {
 
   authState$: Observable<boolean>;
+  return: string = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) { }
 
   ngOnInit() {
     this.authState$ = this.authService.getAuthStateObserver();
+
+    // Get the query params
+    this.route.queryParams
+      .subscribe(params => this.return = params['return'] || '/home');
   }
 
   login() {
-    this.authService.login();
+    this.authService.login().then(
+      _ => this.router.navigateByUrl(this.return)
+    );
   }
 
   logout() {

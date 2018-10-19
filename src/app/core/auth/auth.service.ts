@@ -21,22 +21,22 @@ export class AuthService {
     })
   }
 
-  private checkToken() {
-    this.storage.get(TOKEN_KEY).then(res => {
+  private checkToken(): Promise<void>  {
+    return this.storage.get(TOKEN_KEY).then(res => {
       if (res) {
         this.authState$.next(true);
       }
     })
   }
 
-  public login() {
-    this.storage.set(TOKEN_KEY, 'Bearer 123456').then(res => {
+  public login(): Promise<void> {
+    return this.storage.set(TOKEN_KEY, 'Bearer 123456').then(res => {
       this.authState$.next(true);
     })
   }
 
-  public logout() {
-    this.storage.remove(TOKEN_KEY).then(_ => {
+  public logout(): Promise<void>  {
+    return this.storage.remove(TOKEN_KEY).then(_ => {
       this.authState$.next(false);
     })
   }
