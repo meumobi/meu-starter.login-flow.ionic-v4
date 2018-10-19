@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class LoginPage implements OnInit {
 
   authState$: Observable<boolean>;
-  
+
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
@@ -23,6 +23,5 @@ export class LoginPage implements OnInit {
 
   logout() {
     this.authService.logout();
-		
   }
 }
